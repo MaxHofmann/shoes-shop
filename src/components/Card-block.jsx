@@ -1,6 +1,7 @@
 import React from 'react';
+// import img from '../../public/img/shoes/img1.jpg'
 
-function Card() {
+function Card({ name, imageUrl, price }) {
   const [onAdded, setOnAdded] = React.useState(false);
   const [onAddedFavorite, setOnAddedFavorite] = React.useState(false);
 
@@ -20,13 +21,13 @@ function Card() {
           className={
             onAddedFavorite ? 'button--icon fas fa-heart heart-active' : 'button--icon fas fa-heart'
           }></button>
-        <img src="/img/shoes/img1.jpg" alt="shoes" />
+        <img src={imageUrl} alt="shoes" />
       </div>
-      <h3>Мужские Кроссовки Nike Blazer Mid Suede</h3>
+      <h3>{name}</h3>
       <div className="item--content">
         <div className="item--price">
           <span>Цена:</span>
-          <b>600 грн.</b>
+          <b>{price} грн.</b>
         </div>
         <button
           onClick={onAddCard}

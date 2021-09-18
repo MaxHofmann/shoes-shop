@@ -1,11 +1,12 @@
 import React from 'react';
+import { logo } from '../assets/img'
 
 function Header({ onClickCart }) {
   return (
     <header className="header">
       <div className="container">
         <div className="header__content--left">
-          <img src="/img/logo.png" alt="logo" />
+          <img src={logo} alt="logo" />
           <h3>Shop shoes</h3>
         </div>
         <ul className="header__content--right">
