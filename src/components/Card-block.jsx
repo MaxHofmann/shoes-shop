@@ -1,26 +1,43 @@
 import React from 'react';
-// import img from '../../public/img/shoes/img1.jpg'
+import AppContext from '../context';
 
-function Card({ name, imageUrl, price }) {
-  const [onAdded, setOnAdded] = React.useState(false);
-  const [onAddedFavorite, setOnAddedFavorite] = React.useState(false);
+function Card({
+  keyCard,
+  id,
+  name,
+  imageUrl,
+  price,
+  onAddItem,
+  onAddFavoriteItem,
+  onRemoveCard,
+}) {
+  const { isItemAdded, isItemFavoriteAdded } = React.useContext(AppContext);
 
   const onAddCard = () => {
-    setOnAdded(!onAdded);
+    onAddItem({ id, name, imageUrl, price, keyCard });
   };
 
   const onAddFavorite = () => {
-    setOnAddedFavorite(!onAddedFavorite);
+    onAddFavoriteItem({ id, name, imageUrl, price, keyCard });
   };
 
   return (
     <li className="content--item">
       <div className="wrapper--img">
-        <button
-          onClick={onAddFavorite}
-          className={
-            onAddedFavorite ? 'button--icon fas fa-heart heart-active' : 'button--icon fas fa-heart'
-          }></button>
+        {onAddFavoriteItem && (
+          <button
+            onClick={onAddFavorite}
+            className={
+              isItemFavoriteAdded(id)
+                ? 'button--icon fas fa-heart heart-active'
+                : 'button--icon fas fa-heart'
+            }></button>
+        )}
+        {onRemoveCard && (
+          <button
+            onClick={() => onRemoveCard(id, keyCard)}
+            className="button--icon fas fa-heart heart-active"></button>
+        )}
         <img src={imageUrl} alt="shoes" />
       </div>
       <h3>{name}</h3>
@@ -29,11 +46,13 @@ function Card({ name, imageUrl, price }) {
           <span>Цена:</span>
           <b>{price} грн.</b>
         </div>
-        <button
-          onClick={onAddCard}
-          className={
-            onAdded ? 'button--icon fas fa-check' : 'button--icon fas fa-plus-square'
-          }></button>
+        {onAddItem && (
+          <button
+            onClick={onAddCard}
+            className={
+              isItemAdded(id) ? 'button--icon fas fa-check' : 'button--icon fas fa-plus-square'
+            }></button>
+        )}
       </div>
     </li>
   );
