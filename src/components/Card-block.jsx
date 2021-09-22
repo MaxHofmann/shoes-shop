@@ -1,5 +1,7 @@
 import React from 'react';
 import AppContext from '../context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faPlusSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 
 function Card({
   keyCard,
@@ -31,12 +33,14 @@ function Card({
               isItemFavoriteAdded(id)
                 ? 'button--icon fas fa-heart heart-active'
                 : 'button--icon fas fa-heart'
-            }></button>
+            }>{<FontAwesomeIcon icon={faHeart} />}</button>
         )}
         {onRemoveCard && (
           <button
             onClick={() => onRemoveCard(id, keyCard)}
-            className="button--icon fas fa-heart heart-active"></button>
+            className="button--icon fas fa-heart heart-active">
+              {<FontAwesomeIcon icon={faHeart} />}
+            </button>
         )}
         <img src={imageUrl} alt="shoes" />
       </div>
@@ -51,7 +55,9 @@ function Card({
             onClick={onAddCard}
             className={
               isItemAdded(id) ? 'button--icon fas fa-check' : 'button--icon fas fa-plus-square'
-            }></button>
+            }>
+              {isItemAdded(id) ? <FontAwesomeIcon icon={faCheckSquare} /> : <FontAwesomeIcon icon={faPlusSquare} />}
+            </button>
         )}
       </div>
     </li>

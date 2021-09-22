@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 function DrawerCard({ id, keyCard, name, imageUrl, price, onRemoveCard }) {
   return (
@@ -13,7 +15,9 @@ function DrawerCard({ id, keyCard, name, imageUrl, price, onRemoveCard }) {
             Цена: <b>{price} грн.</b>
           </span>
         </div>
-        <button onClick={() => onRemoveCard(id)} className="button--icon fas fa-times"></button>
+        <button onClick={() => onRemoveCard(id)} className="button--icon fas fa-times">
+          {<FontAwesomeIcon icon={faTimesCircle} />}
+        </button>
       </div>
     </li>
   );

@@ -20,9 +20,13 @@
   border: 1px solid;
   transition: color 0.3s, background-color ease-in-out;
 
-  &::before {
+  svg {
     transition: font-size 0.1s ease-in-out;
     font-size: 24px;
+  }
+  
+  &:active svg {
+    font-size: 20px;
   }
 
   &:hover {
@@ -32,16 +36,25 @@
   }
 }
 
+.button--icon.fa-cart-plus {
+  margin-right: 10px;
+}
+
+.button--icon.fa-user-circle {
+  margin-left: 10px;
+}
+
 .fa-plus-square {
   &:active {
-    &::before {
+    svg {
+      margin: 0;
       font-size: 20px;
     }
   }
 
   &:hover {
-    &::before {
-      display: block;
+    svg {
+      margin: 0;
       animation: rotate-icon 0.3s;
     }
   }
@@ -56,13 +69,13 @@
   }
 }
 
-.fa-heart {
+.button--icon.fa-heart {
   position: absolute;
   top: 5px;
   left: 5px;
-  opacity: 0.1;
+  opacity: 0.3;
 
-  &:active {
+  svg:active {
     &::before {
       font-size: 20px;
     }
@@ -70,20 +83,21 @@
 
   &:hover {
     opacity: 1;
-    &::before {
-      animation: shaking-heard 0.5s;
+    svg {
+      opacity: 1;
+      animation: shaking-heard .5s;
     }
   }
 
   @keyframes shaking-heard {
     10% {
-      font-size: 30px;
+      font-size: 34px;
     }
     40% {
       font-size: 28px;
     }
     70% {
-      font-size: 30px;
+      font-size: 32px;
     }
     100% {
       font-size: 24px;
@@ -93,24 +107,23 @@
 
 .fa-times {
   &:active {
-    &::before {
+    svg {
       font-size: 20px;
     }
   }
 
   &:hover {
-    &::before {
-      display: block;
-      animation: rotate-icon 0.3s ease-in-out;
+    svg {
+      animation: rotate-icon-times 0.3s ease-in-out;
     }
   }
 
-  @keyframes rotate-icon {
+  @keyframes rotate-icon-times {
     0% {
       transform: rotate(0deg);
     }
     100% {
-      transform: rotate(180deg);
+      transform: rotate(360deg);
     }
   }
 }
@@ -121,7 +134,7 @@
 
   &:hover {
     color: #21d934;
-    &::before {
+    svg {
       animation: font-size-anim 0.3s;
     }
   }
@@ -136,10 +149,14 @@
   }
 }
 
-.heart-active {
+.button--icon.heart-active {
   color: #fe08f2;
   background-color: #fff;
   opacity: 1;
+  svg {
+    color: #fe08f2;
+    opacity: 1;
+  }
 
   &:hover {
     color: #fe08f2;
@@ -149,40 +166,17 @@
 .fa-backspace {
   width: 50px;
   &:hover {
-    &::before {
-      display: block;
-      animation: translate-left 0.3s;
+    svg {
+      animation: rotate-icon 0.3s;
     }
   }
 
-  @keyframes translate-left {
+  @keyframes rotate-icon {
     0% {
-      transform: translateX(0px);
-    }
-    70% {
-      transform: translateX(-9px);
+      transform: rotate(0deg);
     }
     100% {
-      transform: translateX(0);
-    }
-  }
-}
-
-.fa-cart-plus {
-  margin-right: 10px;
-}
-
-.fa-user-circle {
-  margin-left: 10px;
-}
-
-.fa-gratipay,
-.fa-user-circle,
-.fa-cart-plus,
-.fa-backspace {
-  &:active {
-    &::before {
-      font-size: 20px;
+      transform: rotate(-360deg);
     }
   }
 }

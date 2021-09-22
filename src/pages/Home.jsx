@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card } from '../components';
+import Carousel from '../components/Carousel ';
 import SkeletonBlock from '../components/Skeleton-block';
-import MySwiper from '../components/Swiper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function Home({
   items,
@@ -11,19 +13,18 @@ function Home({
   onAddToFavorite,
   isLoading,
 }) {
-  
   return (
     <main className="main">
       <div className="container">
+      <Carousel />
         <div className="content__items--top">
           <h1>{searchValue ? `поиск по запросу "${searchValue}"` : 'Все кроссовки'}</h1>
           <div className="search__block">
-            <i className="fas fa-search"></i>
+            <i className="fas fa-search">{<FontAwesomeIcon icon={faSearch} />}</i>
             <input onChange={onChangeSearchInput} type="text" placeholder="поиск..." />
           </div>
         </div>
         <ul className="content__items">
-          <MySwiper/>
           {isLoading
             ? [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)
             : items

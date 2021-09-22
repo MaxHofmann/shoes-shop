@@ -52,7 +52,10 @@ function App() {
         await axios.delete(`https://6145cc0038339400175fc700.mockapi.io/api/cart/${findItem.id}`);
       } else {
         setCartItems((prev) => [...prev, obj]);
-        const { data } = await axios.post('https://6145cc0038339400175fc700.mockapi.io/api/cart', obj);
+        const { data } = await axios.post(
+          'https://6145cc0038339400175fc700.mockapi.io/api/cart',
+          obj,
+        );
         setCartItems((prev) =>
           prev.map((item) => {
             if (item.keyCard === data.keyCard) {
@@ -84,10 +87,15 @@ function App() {
       const findItem = favorites.find((item) => Number(item.keyCard) === Number(obj.id));
       if (findItem) {
         setFavorites((prev) => prev.filter((item) => Number(item.keyCard) !== Number(obj.id)));
-        await axios.delete(`https://6145cc0038339400175fc700.mockapi.io/api/favorites/${findItem.id}`);
+        await axios.delete(
+          `https://6145cc0038339400175fc700.mockapi.io/api/favorites/${findItem.id}`,
+        );
       } else {
         setFavorites((prev) => [...prev, obj]);
-        const { data } = await axios.post('https://6145cc0038339400175fc700.mockapi.io/api/favorites', obj);
+        const { data } = await axios.post(
+          'https://6145cc0038339400175fc700.mockapi.io/api/favorites',
+          obj,
+        );
         setFavorites((prev) =>
           prev.map((item) => {
             if (item.keyCard === data.keyCard) {
@@ -125,6 +133,7 @@ function App() {
   return (
     <AppContext.Provider
       value={{
+        isLoading,
         items,
         cartItems,
         favorites,

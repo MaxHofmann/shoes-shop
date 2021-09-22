@@ -2,6 +2,8 @@ import React from 'react';
 import { useCart } from '../hooks/useCart';
 import { Link } from 'react-router-dom';
 import { logo } from '../assets/img';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartPlus, faGrinHearts, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Header({ onClickCart }) {
   const { totalPrice } = useCart();
@@ -17,15 +19,21 @@ function Header({ onClickCart }) {
 
         <ul className="header__content--right">
           <li>
-            <button onClick={onClickCart} className="button--icon fas fa-cart-plus"></button>
+            <button onClick={onClickCart} className="button--icon fas fa-cart-plus">
+              {<FontAwesomeIcon icon={faCartPlus} />}
+            </button>
           </li>
           <span>{totalPrice} грн.</span>
           <Link to="/favorite">
-            <button className="button--icon fab fa-gratipay"></button>
+            <button className="button--icon fab fa-gratipay">
+              {<FontAwesomeIcon icon={faGrinHearts} />}
+            </button>
           </Link>
           <li>
             <Link to="/orders">
-              <button className="button--icon fas fa-user-circle"></button>
+              <button className="button--icon fas fa-user-circle">
+                {<FontAwesomeIcon icon={faUserCircle} />}
+              </button>
             </Link>
           </li>
         </ul>

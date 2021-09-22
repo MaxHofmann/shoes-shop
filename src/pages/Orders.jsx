@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Card } from '../components';
 import { useCart } from '../hooks/useCart';
+import SkeletonBlock from '../components/Skeleton-block';
 
 function Orders() {
   const { totalOrderPrice } = useCart();
@@ -12,7 +13,7 @@ function Orders() {
     (async () => {
       try {
         const { data } = await axios.get('https://6145cc0038339400175fc700.mockapi.io/api/orders');
-        setOrders(data)
+        setOrders(data);
         setIsLoading(false);
       } catch (error) {
         alert('Ошибка при запросе заказов');
@@ -31,15 +32,17 @@ function Orders() {
           </div>
         </div>
         <ul className="content__items">
-          {orders.map((obj) => (
-            <Card
-              key={obj.id}
-              id={obj.id}
-              imageUrl={obj.imageUrl}
-              name={obj.name}
-              price={obj.price}
-            />
-          ))}
+          {isLoading
+            ? [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)
+            : orders.map((obj) => (
+                <Card
+                  key={obj.id}
+                  id={obj.id}
+                  imageUrl={obj.imageUrl}
+                  name={obj.name}
+                  price={obj.price}
+                />
+              ))}
         </ul>
       </div>
     </main>
