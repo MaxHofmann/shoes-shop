@@ -1,13 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import { Card } from '../components';
+import { Card, SkeletonBlock } from '../components';
 import { useCart } from '../hooks/useCart';
-import SkeletonBlock from '../components/Skeleton-block';
+import AppContext from '../context.js';
 
 function Orders() {
   const { totalOrderPrice } = useCart();
   const [orders, setOrders] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  const { selectSize } = React.useContext(AppContext);
 
   React.useEffect(() => {
     (async () => {
@@ -41,6 +42,8 @@ function Orders() {
                   imageUrl={obj.imageUrl}
                   name={obj.name}
                   price={obj.price}
+                  sizeItem={obj.sizeItem}
+                  selectSize={selectSize}
                 />
               ))}
         </ul>

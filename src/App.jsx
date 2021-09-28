@@ -6,16 +6,17 @@ import Home from './pages/Home.jsx';
 import Favorite from './pages/Favorite';
 import AppContext from './context.js';
 import Orders from './pages/Orders';
+import classNames from 'classnames';
 
 function App() {
   const [items, setItems] = React.useState([]);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [orderItems, setOrderItems] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState('');
-  const [cartOpened, setCartOpened] = React.useState(false);
+  const [cartOpened, setCartOpened] = React.useState('drawer');
+  const [cardOpened, setCardOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
-
+  const [selectSize, setSelectSize] = React.useState('');
   const itemsUrl = `https://6145cc0038339400175fc700.mockapi.io/api/Shoes`;
   const favoriteUrl = `https://6145cc0038339400175fc700.mockapi.io/api/favorites`;
   const cartUrl = `https://6145cc0038339400175fc700.mockapi.io/api/cart`;
@@ -118,10 +119,6 @@ function App() {
     setFavorites((prev) => prev.filter((item) => Number(item.id) !== Number(id)));
   };
 
-  const onChangeSearchInput = (event) => {
-    setSearchValue(event.target.value);
-  };
-
   const isItemAdded = (id) => {
     return cartItems.some((obj) => Number(obj.keyCard) === Number(id));
   };
@@ -138,28 +135,41 @@ function App() {
         cartItems,
         favorites,
         orderItems,
+        selectSize,
         isItemAdded,
         isItemFavoriteAdded,
         setCartItems,
+        setCardOpened,
+        setSelectSize,
+        cardOpened
       }}>
       <div className="wrapper">
-        <div className={cartOpened ? 'content clear' : 'content'}>
-          {cartOpened && (
+        <div
+          className={classNames({
+            content:
+              (cartOpened === 'drawer' && cardOpened === false) ||
+              (cartOpened === false && cardOpened === false),
+            'content clear':
+              (cartOpened === true && cardOpened === false) ||
+              (cartOpened === 'drawer' && cardOpened === true) ||
+              (cartOpened === false && cardOpened === true),
+          })}>
+          {
             <Drawer
+              cartOpened={cartOpened}
               onClose={() => setCartOpened(false)}
               items={cartItems}
               onRemove={onRemoveItem}
             />
-          )}
+          }
           <Header onClickCart={() => setCartOpened(true)} />
           <Route path="/" exact>
             <Home
               items={items}
-              searchValue={searchValue}
-              onChangeSearchInput={onChangeSearchInput}
               onAddToCart={onAddToCart}
               onAddToFavorite={onAddToFavorite}
               isLoading={isLoading}
+              onClose={() => setCardOpened(false)}
             />
           </Route>
           <Route path="/favorite" exact>

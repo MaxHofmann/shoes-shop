@@ -1,10 +1,9 @@
 import React from 'react';
-import { Card } from '../components';
+import { Card, SkeletonBlock } from '../components';
 import AppContext from '../context.js';
-import SkeletonBlock from '../components/Skeleton-block';
 
 function Favorite({ onRemove }) {
-  const { favorites, isLoading } = React.useContext(AppContext);
+  const { favorites, isLoading, selectSize} = React.useContext(AppContext);
   return (
     <main className="main">
       <div className="container">
@@ -21,6 +20,8 @@ function Favorite({ onRemove }) {
                   imageUrl={obj.imageUrl}
                   name={obj.name}
                   price={obj.price}
+                  sizeItem={obj.sizeItem}
+                  selectSize={selectSize}
                   onRemoveCard={onRemove}
                 />
               ))}

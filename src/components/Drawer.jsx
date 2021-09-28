@@ -4,12 +4,12 @@ import { DrawerCard, DrawerCardInfo } from '.';
 import { removeCart, check } from '../assets/img';
 import { useCart } from '../hooks/useCart';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faBackspace } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
 
-function Drawer({ onClose, onRemove, items }) {
+function Drawer({ onClose, onRemove, items, cartOpened }) {
   const ordersUrl = `https://6145cc0038339400175fc700.mockapi.io/api/orders`;
   const cartUrl = `https://6145cc0038339400175fc700.mockapi.io/api/cart`;
-
   const { cartItems, setCartItems, totalPrice } = useCart();
   const [orderId, setOrderId] = React.useState(null);
   const [isOrderCoplete, setIsOrderComplete] = React.useState(false);
@@ -38,12 +38,17 @@ function Drawer({ onClose, onRemove, items }) {
   };
 
   return (
-    <div className="drawer">
+    <div
+      className={classNames({
+        drawer: cartOpened === 'drawer',
+        'drawer open-drawer': cartOpened === true,
+        'drawer close-drawer': cartOpened === false,
+      })}>
       <div className="drawer__block">
         <div className="drawer__block--top">
           <h2>Корзина</h2>
           <button onClick={onClose} className="button--icon fas fa-backspace">
-            {<FontAwesomeIcon icon={faUndo} />}
+            {<FontAwesomeIcon icon={faBackspace} />}
           </button>
         </div>
         {items.length > 0 ? (
