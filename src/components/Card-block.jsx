@@ -33,7 +33,6 @@ function Card({
     return () => {
       if(selectSize.id === id) {
         setOnSizeItem(selectSize.size)
-        setOnSizeItem(selectSize.size)
       }
     }
   }, [selectSize, onSizeItem, id])

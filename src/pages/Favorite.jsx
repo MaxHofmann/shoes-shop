@@ -12,8 +12,9 @@ function Favorite({ onRemove }) {
         </div>
         <ul className="content__items">
           {isLoading
-            ? [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)
-            : favorites.map((obj) => (
+            ? null
+            : 
+            favorites.map((obj) => (
                 <Card
                   key={obj.id}
                   id={obj.id}
@@ -32,3 +33,4 @@ function Favorite({ onRemove }) {
 }
 
 export default Favorite;
+// [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)

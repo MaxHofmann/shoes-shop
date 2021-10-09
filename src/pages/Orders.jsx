@@ -34,7 +34,7 @@ function Orders() {
         </div>
         <ul className="content__items">
           {isLoading
-            ? [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)
+            ? null
             : orders.map((obj) => (
                 <Card
                   key={obj.id}

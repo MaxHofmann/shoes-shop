@@ -72,10 +72,6 @@ function Drawer({ onClose, onRemove, items, cartOpened }) {
                   <span>Итого : </span>
                   <b>{totalPrice} грн.</b>
                 </div>
-                <div className="drawer__block--tax">
-                  <span>Итого 1% : </span>
-                  <b>20 грн.</b>
-                </div>
               </div>
               <button onClick={onClickOrder} className="button">
                 Оформить заказ

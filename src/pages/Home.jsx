@@ -10,7 +10,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
   const [inputValue, setInputValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
   const { selectSize, setSelectSize } = React.useContext(AppContext);
-
+ 
   const onSearchValue = () => {
     setSearchValue(inputValue);
   };
@@ -20,7 +20,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
   };
 
   return (
-    <main className="main">
+    <main className="main" >
       <div className="container">
         <Carousel />
         <div className="content__items--top">
@@ -32,10 +32,12 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
             <input onChange={onChangeValue} type="text" placeholder="поиск..." />
           </div>
         </div>
-        <ul className={modalItems ? 'content__items modal--items' : 'content__items'}>
-          {isLoading
-            ? [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)
-            : items
+        <ul  className={modalItems ? 'content__items modal--items' : 'content__items'}>
+          {
+          isLoading || isLoading == null
+            ? null
+            : 
+            items
                 .filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
                 .map((obj) => (
                   <Card
@@ -72,6 +74,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
               onClose={onClose}
               setSelectSize={setSelectSize}
               onAddItem={(obj) => onAddToCart(obj)}
+              onAddFavoriteItem={(obj) => onAddToFavorite(obj)}
             />
           )}
         </ul>
@@ -81,3 +84,4 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
 }
 
 export default Home;
+// [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)

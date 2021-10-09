@@ -7,7 +7,8 @@ import {
   faPercent,
   faBackspace,
   faCheckSquare,
-  faPlusSquare
+  faPlusSquare,
+  faHeart,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
@@ -24,29 +25,37 @@ function ModalCard({
   thereAre,
   onClose,
   setSelectSize,
-  onAddItem
+  onAddItem,
+  onAddFavoriteItem,
 }) {
   const [srcImage, setSrcImage] = React.useState(imageUrl);
   const [animationTrigger, setClassImage] = React.useState(false);
   const [fullImage, setFullImage] = React.useState(null);
   const [classSize, setClassSize] = React.useState(0);
   const [sizeItem, setAddSizeItem] = React.useState(sizes[0]);
-  const [selectSize, setAddSelectItem] = React.useState(sizes[0]);
-
-  const { cardOpened, isItemAdded } = React.useContext(AppContext);
+  const [selectSize, setAddSelectItem] = React.useState({
+    id: id,
+    size: sizes[0],
+  });
+  console.log(sizeItem, selectSize);
+  const { cardOpened, isItemAdded, isItemFavoriteAdded } = React.useContext(AppContext);
 
   React.useEffect(() => {
     return () => {
       setClassImage(!animationTrigger);
-      if(!arrayImages.includes(srcImage)) {
-        setSrcImage(arrayImages[0])
+      if (!arrayImages.includes(srcImage)) {
+        setSrcImage(arrayImages[0]);
       }
     };
-  }, [srcImage, animationTrigger, setSelectSize,arrayImages,imageUrl]);
+  }, [srcImage, animationTrigger, setSelectSize, arrayImages, imageUrl]);
 
   const onCloseModal = () => {
-    onClose()
-  }
+    onClose();
+    setAddSelectItem(sizes[0]);
+    setSelectSize("");
+    setAddSelectItem("");
+    setClassSize(0);
+  };
 
   const onImage = (event) => {
     setSrcImage(event.target.src);
@@ -63,13 +72,18 @@ function ModalCard({
 
   const onSelectSize = (event) => {
     setSelectSize({ id: id, size: event.target.innerText });
-    setAddSelectItem({ id: id, size: event.target.innerText })
+    setAddSelectItem({ id: id, size: event.target.innerText });
     setClassSize(+event.target.id);
   };
 
   const onAddCard = () => {
-    onAddItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize});
+    onAddItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize });
   };
+
+  const onAddFavorite = () => {
+    onAddFavoriteItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize });
+  };
+
 
   return (
     <li
@@ -81,7 +95,10 @@ function ModalCard({
         {<FontAwesomeIcon icon={faBackspace} />}
       </button>
       <div className="modal--content-top">
-        <div className="modal__item--left">
+        <div
+          className={
+            fullImage ? 'modal__item--left modal__item--left--fullImage' : 'modal__item--left'
+          }>
           {arrayImages.map((item, index) => (
             <div onClick={onFullImage} key={index} className="wrapper__images">
               <img onMouseMove={onImage} src={item} alt="img" />
@@ -124,34 +141,51 @@ function ModalCard({
           <div className="modal__price">
             <span>
               <b>Цена :</b> {price}
+              {discount > 0 && (
+                <span>
+                  {' '}
+                  - {discount} <FontAwesomeIcon icon={faPercent} />
+                </span>
+              )}
+            </span>
+          </div>
+          {discount > 0 && (
+            <div className="modal__price discount">
               <span>
-                {' '}
-                - {discount} <FontAwesomeIcon icon={faPercent} />
+                <b>Цена со скидкой : </b>
+                <span className="column">
+                  <span>{price - (price * discount) / 100} </span>
+                </span>
               </span>
-            </span>
-          </div>
-          <div className="modal__price discount">
-            <span>
-              <b>Цена со скидкой : </b>
-              <span className="column">
-                <span>{price - (price * discount) / 100} </span>
-              </span>
-            </span>
-          </div>
-          <div>
-          {onAddItem && (
-          <button
-            onClick={onAddCard}
-            className={
-              isItemAdded(id) ? 'button--icon fas fa-check' : 'button--icon fas fa-plus-square'
-            }>
-            {isItemAdded(id) ? (
-              <FontAwesomeIcon icon={faCheckSquare} />
-            ) : (
-              <FontAwesomeIcon icon={faPlusSquare} />
+            </div>
+          )}
+          <div className="modal--icon--wrapper">
+            {onAddFavoriteItem && (
+              <button
+                onClick={onAddFavorite}
+                className={
+                  isItemFavoriteAdded(id)
+                    ? 'button--icon modal--icon fas fa-heart heart-active'
+                    : 'button--icon modal--icon fas fa-heart'
+                }>
+                {<FontAwesomeIcon icon={faHeart} />}
+              </button>
             )}
-          </button>
-        )}
+            {onAddItem && thereAre && (
+              <button
+                onClick={onAddCard}
+                className={
+                  isItemAdded(id)
+                    ? 'button--icon modal--icon fas fa-check'
+                    : 'button--icon modal--icon fas fa-plus-square'
+                }>
+                {isItemAdded(id) ? (
+                  <FontAwesomeIcon icon={faCheckSquare} />
+                ) : (
+                  <FontAwesomeIcon icon={faPlusSquare} />
+                )}
+              </button>
+            )}
           </div>
         </div>
         <div className="modal__item--right">

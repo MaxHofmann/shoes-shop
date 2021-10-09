@@ -50,10 +50,12 @@
   }
 
   &__block {
+    min-height: 400px;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px;
     margin-bottom: 20px;
+    transition: .3s;
   }
 
   .drawer--items {
@@ -71,6 +73,7 @@
     border-radius: 10px;
     background-color: $background-item;
     margin-bottom: 20px;
+    
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 
     &:hover {
@@ -90,7 +93,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      width: 75%;
+      width: 71%;
       background-color: #fff;
       min-height: 145px;
       padding: 0 5px;
@@ -99,6 +102,8 @@
 
     .item--price {
       padding: 0 5px;
+      max-width: 300px;
+
     }
   }
 

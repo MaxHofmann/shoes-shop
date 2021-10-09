@@ -10,7 +10,7 @@ function Carousel() {
     {
       id: 2,
       percent: 10,
-      imageUrl: 'https://ic.pics.livejournal.com/7odezhek/68181828/801162/801162_900.jpg',
+      imageUrl: 'https://www.sneakerfiles.com/wp-content/uploads/2019/09/nike-adapt-huarache-opti-yellow-bv6397-710-release-date-info-1.jpg',
     },
     {
       id: 3,

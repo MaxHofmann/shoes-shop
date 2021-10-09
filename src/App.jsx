@@ -10,6 +10,9 @@ import classNames from 'classnames';
 
 function App() {
   const [items, setItems] = React.useState([]);
+  const [itemsLength, setItemsLength] = React.useState(0);
+  const [totalCount, setTotalCount] = React.useState(24);
+  const [fetching, setFetching] = React.useState(false);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [orderItems, setOrderItems] = React.useState([]);
@@ -17,11 +20,11 @@ function App() {
   const [cardOpened, setCardOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [selectSize, setSelectSize] = React.useState('');
-  const itemsUrl = `https://6145cc0038339400175fc700.mockapi.io/api/Shoes`;
+  
   const favoriteUrl = `https://6145cc0038339400175fc700.mockapi.io/api/favorites`;
   const cartUrl = `https://6145cc0038339400175fc700.mockapi.io/api/cart`;
   const ordersUrl = `https://6145cc0038339400175fc700.mockapi.io/api/orders`;
-
+  
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -29,21 +32,40 @@ function App() {
           axios.get(ordersUrl),
           axios.get(cartUrl),
           axios.get(favoriteUrl),
-          axios.get(itemsUrl),
+          axios.get(`https://6145cc0038339400175fc700.mockapi.io/api/Shoes`),
         ]);
 
         setIsLoading(false);
-
         setOrderItems(orderResponse.data);
         setCartItems(cartResponse.data);
         setFavorites(favoriteResponse.data);
-        setItems(itemsResponse.data);
+        setTotalCount(itemsResponse.data.length);
+        setFetching(true)
       } catch (error) {
         console.log('Ошибка при запросе на сервер');
       }
     }
     fetchData();
-  }, [itemsUrl, favoriteUrl, cartUrl, ordersUrl]);
+  }, [favoriteUrl, cartUrl, ordersUrl]);
+
+  React.useEffect(() => {
+    if (fetching ) {
+      axios
+        .get(`https://6145cc0038339400175fc700.mockapi.io/api/Shoes?page=1&limit=${itemsLength}`)
+        .then((response) => {
+          setItems(response.data);
+          setItemsLength((prevState) => prevState + 8);
+        })
+        .finally(() => setFetching(false));
+    }
+  }, [fetching]);
+
+  React.useEffect(() => {
+    document.addEventListener('scroll', scrollHandler);
+    return function () {
+      document.removeEventListener('scroll', scrollHandler);
+    };
+  }, []);
 
   const onAddToCart = async (obj) => {
     try {
@@ -127,6 +149,20 @@ function App() {
     return favorites.some((obj) => Number(obj.keyCard) === Number(id));
   };
 
+  const scrollHandler = (event) => {
+    if (
+      event.target.documentElement.scrollHeight -
+        (event.target.documentElement.scrollTop + window.innerHeight) <
+        60 && event.target.documentElement.scrollHeight -
+        (event.target.documentElement.scrollTop + window.innerHeight) > 40 &&
+      itemsLength-8 < totalCount
+    ) {
+      setFetching(true);
+      console.log('scroll -', itemsLength-8);
+    } 
+  };
+  // console.log('l', itemsLength);
+  // console.log('t', totalCount);
   return (
     <AppContext.Provider
       value={{
@@ -141,7 +177,7 @@ function App() {
         setCartItems,
         setCardOpened,
         setSelectSize,
-        cardOpened
+        cardOpened,
       }}>
       <div className="wrapper">
         <div
@@ -166,6 +202,7 @@ function App() {
           <Route path="/" exact>
             <Home
               items={items}
+              itemsLength={itemsLength}
               onAddToCart={onAddToCart}
               onAddToFavorite={onAddToFavorite}
               isLoading={isLoading}
