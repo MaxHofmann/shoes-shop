@@ -39,11 +39,29 @@
 }
 
 .button--icon.fa-cart-plus {
-  margin-right: 10px;
+  margin-right: 5px;
+  @media (min-width: 580px) {
+    margin-right: 10px;
+  }
+}
+
+.button--icon.fab.fa-gratipay {
+  margin-left: 5px;
+  @media (min-width: 580px) {
+    margin-left: 10px;
+  }
 }
 
 .button--icon.fa-user-circle {
-  margin-left: 10px;
+  margin-left: 5px;
+  @media (min-width: 580px) {
+    margin-left: 10px;
+  }
+}
+
+.active {
+  color: #fe08f2;
+  background-color: #fff;
 }
 
 .fa-plus-square {

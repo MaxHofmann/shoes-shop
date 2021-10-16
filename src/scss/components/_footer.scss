@@ -1,0 +1,42 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+  padding: 15px;
+  background-color: $background-item;
+  z-index: 100;
+  p {
+    font-size: 22px;
+    margin-right: 20px;
+  }
+  a {
+    position: relative;
+    svg {
+      position: absolute;
+      font-size: 30px;
+      margin-right: 20px;
+      height: 30px;
+      transition: color 0.3s, height 0.3s;
+
+      &:hover {
+        cursor: pointer;
+        color: #fe08f2;
+      }
+
+      &:active {
+        height: 25px;
+      }
+    }
+  }
+
+  .git--icon svg{
+    transform: translate(-50%, -50%);
+  }
+
+  .link--icon svg{
+    transform: translate(100%, -50%);
+  }
+}

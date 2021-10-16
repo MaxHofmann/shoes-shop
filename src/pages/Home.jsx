@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, ModalCard, SkeletonBlock } from '../components';
+import { Card, ModalCard } from '../components';
 import Carousel from '../components/Carousel ';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faBackspace } from '@fortawesome/free-solid-svg-icons';
 import AppContext from '../context.js';
 
 function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
@@ -10,9 +10,16 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
   const [inputValue, setInputValue] = React.useState('');
   const [searchValue, setSearchValue] = React.useState('');
   const { selectSize, setSelectSize } = React.useContext(AppContext);
- 
+
   const onSearchValue = () => {
     setSearchValue(inputValue);
+  };
+
+  const onSearchBackspace = () => {
+    if(inputValue.length > 0) {
+      setInputValue('')
+    }
+    setSearchValue('');
   };
 
   const onChangeValue = (event) => {
@@ -20,7 +27,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
   };
 
   return (
-    <main className="main" >
+    <main className="main">
       <div className="container">
         <Carousel />
         <div className="content__items--top">
@@ -29,15 +36,16 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
             <i onClick={onSearchValue} className="fas fa-search">
               {<FontAwesomeIcon icon={faSearch} />}
             </i>
-            <input onChange={onChangeValue} type="text" placeholder="поиск..." />
+            <input onChange={onChangeValue} value={inputValue} type="text" placeholder="поиск..." />
+            <i onClick={onSearchBackspace} className="fas fa-search-backspace">
+              {<FontAwesomeIcon icon={faBackspace} />}
+            </i>
           </div>
         </div>
-        <ul  className={modalItems ? 'content__items modal--items' : 'content__items'}>
-          {
-          isLoading || isLoading == null
+        <ul className={modalItems ? 'content__items modal--items' : 'content__items'}>
+          {isLoading || isLoading == null
             ? null
-            : 
-            items
+            : items
                 .filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
                 .map((obj) => (
                   <Card
@@ -51,6 +59,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
                     description={obj.description}
                     discount={obj.discount}
                     sizes={obj.size}
+                    size={obj.size[0]}
                     thereAre={obj.thereAre}
                     sizeItem={obj.size[0]}
                     selectSize={selectSize}
@@ -70,6 +79,7 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
               description={modalItems.description}
               discount={modalItems.discount}
               sizes={modalItems.sizes}
+              size={modalItems.sizes[0]}
               thereAre={modalItems.thereAre}
               onClose={onClose}
               setSelectSize={setSelectSize}
@@ -84,4 +94,3 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
 }
 
 export default Home;
-// [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)

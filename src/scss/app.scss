@@ -29,9 +29,11 @@
 
 .wrapper {
   position: relative;
-  padding: 50px;
   background: #854ed5;
   min-height: 100vh;
+  @media (min-width: 580px) {
+    padding: 50px;
+  }
 
   img {
     display: inline-block;
@@ -47,42 +49,65 @@
     background-color: #fff;
     overflow: hidden;
     margin: 0 auto;
-    border-radius: 10px;
-    width: calc(100vw - 100px);
+    width: 100vw;
     min-height: 100vh;
     max-width: 1400px;
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
+    @media (min-width: 580px) {
+      width: calc(100vw - 100px);
+      border-radius: 10px;
+    }
 
     .container {
-      padding: 20px 32px;
+      padding: 10px 15px;
+      @media (min-width: 480px) {
+        padding: 20px 32px;
+      }
     }
 
     main {
       padding: 20px 0;
       min-height: 76vh;
+      flex: 1 1 auto;
     }
   }
 }
 
 .content__items--top {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 0 20px;
 
+  @media (min-width: 980px) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+ 
   .block--price {
     padding: 10px 20px;
     border-radius: 10px;
     background-color: $shop-style-blurred;
     font-size: 20px;
+    animation: block-price-animation 0.6s;
+    @keyframes block-price-animation {
+      0% {
+        transform: translateX(2000px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
   }
 
   input {
     border: 2px solid $shop-style-blurred;
     border-radius: 15px;
     padding: 10px 30px 10px 60px;
-    min-width: 650px;
+    width: 100%;
     font-size: 20px;
     color: $shop-style;
 
@@ -91,8 +116,42 @@
     }
   }
 
+  h1 {
+    padding: 20px 0;
+    font-size: 30px;
+    animation: h-animation 0.6s;
+    @keyframes h-animation {
+      0% {
+        transform: translateX(-2000px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
+    @media (min-width: 480px) {
+      font-size: 48px;
+    }
+    @media (min-width: 980px) {
+      padding: 0;
+    }
+  }
+
   .search__block {
+    width: 100%;
     position: relative;
+    animation: search-block-animation 0.6s;
+    @keyframes search-block-animation {
+      0% {
+        transform: translateX(2000px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
+   
+    @media (min-width: 720px) {
+      width: 650px;
+    }
 
     .fa-search {
       position: absolute;
@@ -100,7 +159,25 @@
       left: 4%;
       transform: translateY(-50%);
       color: $shop-style-blurred;
-      transition: font-size .1s;
+      transition: font-size 0.1s;
+
+      &:hover {
+        cursor: pointer;
+        font-size: 26px;
+      }
+
+      &:active {
+        font-size: 22px;
+      }
+    }
+
+    .fa-search-backspace {
+      position: absolute;
+      top: 50%;
+      right: 4%;
+      transform: translateY(-50%);
+      color: $shop-style-blurred;
+      transition: font-size 0.1s;
 
       &:hover {
         cursor: pointer;

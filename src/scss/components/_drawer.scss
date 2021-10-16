@@ -101,6 +101,8 @@
     }
 
     .item--price {
+      display: flex;
+      flex-direction: column;
       padding: 0 5px;
       max-width: 300px;
 

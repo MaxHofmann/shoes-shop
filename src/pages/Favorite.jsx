@@ -1,9 +1,14 @@
 import React from 'react';
-import { Card, SkeletonBlock } from '../components';
+import { Card } from '../components';
 import AppContext from '../context.js';
 
 function Favorite({ onRemove }) {
-  const { favorites, isLoading, selectSize} = React.useContext(AppContext);
+  const { favorites, isLoading, selectSize, setFlagsPage } = React.useContext(AppContext);
+
+  React.useEffect(() => {
+    setFlagsPage(2);
+  }, [setFlagsPage]);
+
   return (
     <main className="main">
       <div className="container">
@@ -13,15 +18,14 @@ function Favorite({ onRemove }) {
         <ul className="content__items">
           {isLoading
             ? null
-            : 
-            favorites.map((obj) => (
+            : favorites.map((obj) => (
                 <Card
                   key={obj.id}
                   id={obj.id}
                   imageUrl={obj.imageUrl}
                   name={obj.name}
                   price={obj.price}
-                  sizeItem={obj.sizeItem}
+                  sizeItem={obj.size}
                   selectSize={selectSize}
                   onRemoveCard={onRemove}
                 />
@@ -33,4 +37,3 @@ function Favorite({ onRemove }) {
 }
 
 export default Favorite;
-// [...Array(8)].map((obj, index) => <SkeletonBlock key={index} />)

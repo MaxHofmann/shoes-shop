@@ -6,8 +6,7 @@ export const useCart = () => {
   let totalPrice = 0;
   cartItems.forEach((item) => (totalPrice += item.price));
 
-  let totalOrderPrice = 0;
-  orderItems.forEach((item) => (totalOrderPrice += item.price));
 
-  return { cartItems, setCartItems, totalPrice, orderItems, totalOrderPrice, isLoading };
+
+  return { cartItems, setCartItems, totalPrice, orderItems, isLoading };
 };

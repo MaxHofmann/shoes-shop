@@ -11,18 +11,15 @@ function Drawer({ onClose, onRemove, items, cartOpened }) {
   const ordersUrl = `https://6145cc0038339400175fc700.mockapi.io/api/orders`;
   const cartUrl = `https://6145cc0038339400175fc700.mockapi.io/api/cart`;
   const { cartItems, setCartItems, totalPrice } = useCart();
-  const [orderId, setOrderId] = React.useState(null);
   const [isOrderCoplete, setIsOrderComplete] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
+  
   const onClickOrder = async () => {
     try {
-      setIsLoading(true);
-      const { data } = await axios.post(ordersUrl, ...[...cartItems]);
-
-      setOrderId(data.id);
+      await axios.post(ordersUrl, {
+        items: cartItems,
+      });
       setIsOrderComplete(true);
       setCartItems([]);
 
@@ -34,7 +31,6 @@ function Drawer({ onClose, onRemove, items, cartOpened }) {
     } catch (error) {
       console.log('не удалось оформить заказ');
     }
-    setIsLoading(false);
   };
 
   return (
@@ -56,12 +52,14 @@ function Drawer({ onClose, onRemove, items, cartOpened }) {
             <ul className="drawer--items">
               {items.map((obj) => (
                 <DrawerCard
-                  key={obj.id}
+                  key={obj.keyCard}
                   keyCard={obj.keyCard}
                   id={obj.id}
                   imageUrl={obj.imageUrl}
                   name={obj.name}
                   price={obj.price}
+                  sizeItem={obj.size}
+                  selectSize={obj.selectSize.size}
                   onRemoveCard={onRemove}
                 />
               ))}

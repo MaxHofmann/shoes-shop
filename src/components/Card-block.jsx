@@ -22,6 +22,7 @@ function Card({
   description,
   discount,
   sizes,
+  size,
   thereAre,
   sizeItem,
   selectSize,
@@ -39,11 +40,11 @@ function Card({
 
   
   const onAddCard = () => {
-    onAddItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize});
+    onAddItem({ id, name, imageUrl, price, keyCard, size, selectSize});
   };
 
   const onAddFavorite = () => {
-    onAddFavoriteItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize});
+    onAddFavoriteItem({ id, name, imageUrl, price, keyCard, size, selectSize});
   };
 
   const onModalCard = (id) => {

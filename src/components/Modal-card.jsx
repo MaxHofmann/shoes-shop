@@ -22,22 +22,22 @@ function ModalCard({
   description,
   discount,
   sizes,
+  size,
   thereAre,
   onClose,
   setSelectSize,
   onAddItem,
   onAddFavoriteItem,
 }) {
-  const [srcImage, setSrcImage] = React.useState(imageUrl);
+  const [srcImage, setSrcImage] = React.useState(arrayImages[0]);
   const [animationTrigger, setClassImage] = React.useState(false);
   const [fullImage, setFullImage] = React.useState(null);
   const [classSize, setClassSize] = React.useState(0);
-  const [sizeItem, setAddSizeItem] = React.useState(sizes[0]);
   const [selectSize, setAddSelectItem] = React.useState({
     id: id,
-    size: sizes[0],
+    size: size,
   });
-  console.log(sizeItem, selectSize);
+
   const { cardOpened, isItemAdded, isItemFavoriteAdded } = React.useContext(AppContext);
 
   React.useEffect(() => {
@@ -51,7 +51,7 @@ function ModalCard({
 
   const onCloseModal = () => {
     onClose();
-    setAddSelectItem(sizes[0]);
+    setAddSelectItem(size);
     setSelectSize("");
     setAddSelectItem("");
     setClassSize(0);
@@ -77,14 +77,14 @@ function ModalCard({
   };
 
   const onAddCard = () => {
-    onAddItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize });
+    onAddItem({ id, name, imageUrl, price, keyCard, size, selectSize });
   };
 
   const onAddFavorite = () => {
-    onAddFavoriteItem({ id, name, imageUrl, price, keyCard, sizeItem, selectSize });
+    onAddFavoriteItem({ id, name, imageUrl, price, keyCard, size, selectSize });
   };
 
-
+  
   return (
     <li
       className={classNames({
@@ -96,11 +96,15 @@ function ModalCard({
       </button>
       <div className="modal--content-top">
         <div
-          className={
-            fullImage ? 'modal__item--left modal__item--left--fullImage' : 'modal__item--left'
-          }>
+          className={classNames({
+            'modal__item--left modal__item--left--fullImage': fullImage,
+            'modal__item--left': fullImage === null,
+          })}>
           {arrayImages.map((item, index) => (
-            <div onClick={onFullImage} key={index} className="wrapper__images">
+            <div onClick={onFullImage} key={index} className={classNames({
+              "wrapper__images": arrayImages,
+              "wrapper__images active": srcImage === item
+            })}>
               <img onMouseMove={onImage} src={item} alt="img" />
             </div>
           ))}
@@ -127,13 +131,13 @@ function ModalCard({
             {thereAre ? (
               <div className="yeas--icon">
                 <span>
-                  <b>Есть в наличии :</b> <FontAwesomeIcon icon={faCheckCircle} />
+                  <b>В наличии : есть</b> <FontAwesomeIcon icon={faCheckCircle} />
                 </span>
               </div>
             ) : (
               <div className="no--icon">
                 <span>
-                  <b>Есть в наличии :</b> <FontAwesomeIcon icon={faTimesCircle} />
+                  <b>В наличии : нет</b> <FontAwesomeIcon icon={faTimesCircle} />
                 </span>
               </div>
             )}
@@ -204,7 +208,9 @@ function ModalCard({
         </div>
       </div>
       {fullImage && (
-        <div className="wrapper__full--image">
+        <div className={classNames({
+          'wrapper__full--image': fullImage,
+        })} >
           <button onClick={onCloseFullImage} className="button--icon close--image">
             {<FontAwesomeIcon icon={faTimesCircle} />}
           </button>

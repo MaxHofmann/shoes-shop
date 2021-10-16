@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Route } from 'react-router-dom';
-import { Drawer, Header } from './components';
+import { Drawer, Footer, Header } from './components';
 import Home from './pages/Home.jsx';
 import Favorite from './pages/Favorite';
 import AppContext from './context.js';
@@ -10,21 +10,21 @@ import classNames from 'classnames';
 
 function App() {
   const [items, setItems] = React.useState([]);
-  const [itemsLength, setItemsLength] = React.useState(0);
+  const [itemsLength, setItemsLength] = React.useState(16);
   const [totalCount, setTotalCount] = React.useState(24);
+  const [flagsPage, setFlagsPage] = React.useState(1);
   const [fetching, setFetching] = React.useState(false);
   const [cartItems, setCartItems] = React.useState([]);
   const [favorites, setFavorites] = React.useState([]);
   const [orderItems, setOrderItems] = React.useState([]);
   const [cartOpened, setCartOpened] = React.useState('drawer');
   const [cardOpened, setCardOpened] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [selectSize, setSelectSize] = React.useState('');
-  
   const favoriteUrl = `https://6145cc0038339400175fc700.mockapi.io/api/favorites`;
   const cartUrl = `https://6145cc0038339400175fc700.mockapi.io/api/cart`;
   const ordersUrl = `https://6145cc0038339400175fc700.mockapi.io/api/orders`;
-  
+
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -40,7 +40,6 @@ function App() {
         setCartItems(cartResponse.data);
         setFavorites(favoriteResponse.data);
         setTotalCount(itemsResponse.data.length);
-        setFetching(true)
       } catch (error) {
         console.log('Ошибка при запросе на сервер');
       }
@@ -49,7 +48,15 @@ function App() {
   }, [favoriteUrl, cartUrl, ordersUrl]);
 
   React.useEffect(() => {
-    if (fetching ) {
+    axios
+      .get(`https://6145cc0038339400175fc700.mockapi.io/api/Shoes?page=1&limit=8`)
+      .then((response) => {
+        setItems(response.data);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    if (fetching) {
       axios
         .get(`https://6145cc0038339400175fc700.mockapi.io/api/Shoes?page=1&limit=${itemsLength}`)
         .then((response) => {
@@ -61,11 +68,24 @@ function App() {
   }, [fetching]);
 
   React.useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    return function () {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, []);
+    if (itemsLength - 8 < totalCount) {
+      document.addEventListener('scroll', scrollHandler);
+      return function () {
+        document.removeEventListener('scroll', scrollHandler);
+      };
+    }
+  }, [itemsLength, totalCount]);
+
+  const scrollHandler = (event) => {
+    if (
+      event.target.documentElement.scrollHeight -
+        (event.target.documentElement.scrollTop + window.innerHeight) <
+        80 &&
+      itemsLength - 8 < totalCount
+    ) {
+      setFetching(true);
+    }
+  };
 
   const onAddToCart = async (obj) => {
     try {
@@ -149,20 +169,6 @@ function App() {
     return favorites.some((obj) => Number(obj.keyCard) === Number(id));
   };
 
-  const scrollHandler = (event) => {
-    if (
-      event.target.documentElement.scrollHeight -
-        (event.target.documentElement.scrollTop + window.innerHeight) <
-        60 && event.target.documentElement.scrollHeight -
-        (event.target.documentElement.scrollTop + window.innerHeight) > 40 &&
-      itemsLength-8 < totalCount
-    ) {
-      setFetching(true);
-      console.log('scroll -', itemsLength-8);
-    } 
-  };
-  // console.log('l', itemsLength);
-  // console.log('t', totalCount);
   return (
     <AppContext.Provider
       value={{
@@ -177,6 +183,7 @@ function App() {
         setCartItems,
         setCardOpened,
         setSelectSize,
+        setFlagsPage,
         cardOpened,
       }}>
       <div className="wrapper">
@@ -198,7 +205,11 @@ function App() {
               onRemove={onRemoveItem}
             />
           }
-          <Header onClickCart={() => setCartOpened(true)} />
+          <Header
+            flagsPage={flagsPage}
+            setFlagsPage={setFlagsPage}
+            onClickCart={() => setCartOpened(true)}
+          />
           <Route path="/" exact>
             <Home
               items={items}
@@ -216,6 +227,7 @@ function App() {
           <Route path="/orders" exact>
             <Orders />
           </Route>
+          <Footer />
         </div>
       </div>
     </AppContext.Provider>

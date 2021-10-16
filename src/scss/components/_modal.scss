@@ -110,10 +110,22 @@
       left: -350px;
       z-index: 50;
       background: none;
+      animation: start-animation-modal 0.9s ease-in-out;
+      z-index: 29;
+      @keyframes start-animation-modal {
+        0% {
+          left: 1000px;
+        }
+        60% {
+          left: 0px;
+        }
+        100% {
+          left: -350px;
+        }
+      }
 
       .wrapper__images {
         box-shadow: 0px 0px 10px 4px rgba(34, 60, 80, 0.2);
-
       }
     }
 
@@ -161,6 +173,18 @@
             }
           }
         }
+      }
+    }
+
+    .active {
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 188, 212, 0.6);
       }
     }
   }
@@ -332,6 +356,15 @@
     width: 100%;
     margin: 0 auto;
     z-index: 30;
+    animation: start-animation 0.3s;
+    @keyframes start-animation {
+      0% {
+        transform: translateX(1000px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
   }
 }
 
