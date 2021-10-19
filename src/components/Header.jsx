@@ -25,7 +25,7 @@ function Header({ onClickCart, flagsPage, setFlagsPage }) {
               {<FontAwesomeIcon icon={faCartPlus} />}
             </button>
           </li>
-          <span>{totalPrice} грн.</span>
+          <span>{totalPrice}</span>
           <Link to="/">
             <button
               onClick={() => setFlagsPage(1)}
