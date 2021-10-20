@@ -299,3 +299,12 @@
     }
   }
 }
+
+
+.wrapper__buttons--nav {
+  display: flex;
+
+  .modal--backspace {
+    margin-right: 20px;
+  }
+}

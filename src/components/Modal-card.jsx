@@ -9,6 +9,9 @@ import {
   faCheckSquare,
   faPlusSquare,
   faHeart,
+  faImage,
+  faListAlt,
+  faAlignCenter,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 
@@ -33,11 +36,11 @@ function ModalCard({
   const [animationTrigger, setClassImage] = React.useState(false);
   const [fullImage, setFullImage] = React.useState(null);
   const [classSize, setClassSize] = React.useState(0);
+  const [flagItem, setFlagItem] = React.useState(1);
   const [selectSize, setAddSelectItem] = React.useState({
     id: id,
     size: size,
   });
-
   const { cardOpened, isItemAdded, isItemFavoriteAdded } = React.useContext(AppContext);
 
   React.useEffect(() => {
@@ -52,8 +55,8 @@ function ModalCard({
   const onCloseModal = () => {
     onClose();
     setAddSelectItem(size);
-    setSelectSize("");
-    setAddSelectItem("");
+    setSelectSize('');
+    setAddSelectItem('');
     setClassSize(0);
   };
 
@@ -84,32 +87,68 @@ function ModalCard({
     onAddFavoriteItem({ id, name, imageUrl, price, keyCard, size, selectSize });
   };
 
-  
   return (
     <li
       className={classNames({
         'modal--item open': cardOpened,
         'modal--item close': !cardOpened,
       })}>
-      <button onClick={onCloseModal} className="button--icon fas fa-backspace modal--backspace">
-        {<FontAwesomeIcon icon={faBackspace} />}
-      </button>
+      <div className="wrapper__buttons--nav">
+        <button onClick={onCloseModal} className="button--icon fas fa-backspace modal--backspace">
+          {<FontAwesomeIcon icon={faBackspace} />}
+        </button>
+        <button
+          onClick={() => setFlagItem(1)}
+          className={classNames({
+            'button--icon faImage active': flagItem === 1,
+            'button--icon faImage': flagItem,
+          })}>
+          {<FontAwesomeIcon icon={faImage} />}
+        </button>
+        <button
+          onClick={() => setFlagItem(2)}
+          className={classNames({
+            'button--icon faListAlt active': flagItem === 2,
+            'button--icon faListAlt': flagItem,
+          })}>
+          {<FontAwesomeIcon icon={faListAlt} />}
+        </button>
+
+        <button
+          onClick={() => setFlagItem(3)}
+          className={classNames({
+            'button--icon faAlignCenter active': flagItem === 3,
+            'button--icon faAlignCenter': flagItem,
+          })}>
+          {<FontAwesomeIcon icon={faAlignCenter} />}
+        </button>
+      </div>
+
       <div className="modal--content-top">
         <div
           className={classNames({
             'modal__item--left modal__item--left--fullImage': fullImage,
+            'modal__item--left active--item': flagItem === 1,
             'modal__item--left': fullImage === null,
           })}>
           {arrayImages.map((item, index) => (
-            <div onClick={onFullImage} key={index} className={classNames({
-              "wrapper__images": arrayImages,
-              "wrapper__images active": srcImage === item
-            })}>
+            <div
+              onClick={onFullImage}
+              key={index}
+              className={classNames({
+                wrapper__images: arrayImages,
+                'wrapper__images active': srcImage === item,
+              })}>
               <img onMouseMove={onImage} src={item} alt="img" />
             </div>
           ))}
         </div>
-        <div className="modal__item--center">
+
+        <div
+          className={classNames({
+            'modal__item--center': flagItem,
+            'modal__item--center active--item': flagItem === 2,
+          })}>
           <div className="modal__size">
             <h4>Размеры :</h4>
             <div className="modal__sizes--block">
@@ -192,25 +231,48 @@ function ModalCard({
             )}
           </div>
         </div>
-        <div className="modal__item--right">
+
+        <div
+          className={classNames({
+            'modal__item--right': flagItem,
+            'modal__item--right active--item': flagItem === 1,
+          })}>
           <div className={animationTrigger ? 'wrapper__img first' : 'wrapper__img two'}>
             <img id={id} src={srcImage} alt="img" />
           </div>
           <div className="modal__item--name">
             <h2>{name}</h2>
+            {thereAre ? (
+              <div className="yeas--icon">
+                <span>
+                  <b>В наличии : есть</b> <FontAwesomeIcon icon={faCheckCircle} />
+                </span>
+              </div>
+            ) : (
+              <div className="no--icon">
+                <span>
+                  <b>В наличии : нет</b> <FontAwesomeIcon icon={faTimesCircle} />
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div className="modal__content--bottom">
+      <div
+        className={classNames({
+          'modal__content--bottom': flagItem,
+          'modal__content--bottom active--item': flagItem === 3,
+        })}>
         <div className="modal__item--description">
           <h3>Описание</h3>
           <p>{description}</p>
         </div>
       </div>
       {fullImage && (
-        <div className={classNames({
-          'wrapper__full--image': fullImage,
-        })} >
+        <div
+          className={classNames({
+            'wrapper__full--image': fullImage,
+          })}>
           <button onClick={onCloseFullImage} className="button--icon close--image">
             {<FontAwesomeIcon icon={faTimesCircle} />}
           </button>
