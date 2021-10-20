@@ -67,6 +67,7 @@ function ModalCard({
 
   const onFullImage = (event) => {
     setFullImage(event.target.children[0].src);
+    setSrcImage(event.target.children[0].src);
   };
 
   const onCloseFullImage = () => {
