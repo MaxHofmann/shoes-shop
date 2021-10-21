@@ -241,7 +241,12 @@ function ModalCard({
           <div className={animationTrigger ? 'wrapper__img first' : 'wrapper__img two'}>
             <img id={id} src={srcImage} alt="img" />
           </div>
-          <div className="modal__item--name">
+
+          <div
+            className={classNames({
+              'modal__item--name': flagItem,
+              'modal__item--name active--item': flagItem === 1,
+            })}>
             <h2>{name}</h2>
             {thereAre ? (
               <div className="yeas--icon">
@@ -258,16 +263,16 @@ function ModalCard({
             )}
           </div>
         </div>
-      </div>
-      <div
-        className={classNames({
-          'modal__content--bottom': flagItem,
-          'modal__content--bottom active--item': flagItem === 3,
-        })}>
-        <div className="modal__item--description">
-          <h3>Описание</h3>
-          <p>{description}</p>
-        </div>
+        <div
+            className={classNames({
+              'modal__content--bottom': flagItem,
+              'modal__content--bottom active--item': flagItem === 3,
+            })}>
+            <div className="modal__item--description">
+              <h3>Описание</h3>
+              <p>{description}</p>
+            </div>
+          </div>
       </div>
       {fullImage && (
         <div

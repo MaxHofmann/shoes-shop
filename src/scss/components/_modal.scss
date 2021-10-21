@@ -20,13 +20,15 @@
   justify-content: start;
   top: 0;
   padding: 10px;
-  width: 100vw;
+  width: 95vw;
   height: 100vh;
   border-radius: 10px;
   background-color: $shop-style-blurred;
   z-index: 20;
   @media (min-width: 580px) {
-    justify-content: space-between;
+    width: 95vw;
+  }
+  @media (min-width: 1480px) {
     width: 1200px;
     padding: 20px;
   }
@@ -78,12 +80,16 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 10px;
     @media (min-width: 580px) {
-      align-items: inherit;
       justify-content: space-between;
       flex-direction: row;
-      margin-top: 0px;
+      flex-wrap: wrap;
+    }
+
+    @media (min-width: 1480px) {
+      align-items: inherit;
+      justify-content: space-between;
     }
   }
 
@@ -94,6 +100,12 @@
     border-radius: 10px;
     @media (min-width: 580px) {
       display: flex;
+      width: 100%;
+      margin-top: 10px;
+    }
+    @media (min-width: 1480px) {
+      display: flex;
+      width: 100%;
       padding: 20px;
     }
 
@@ -124,14 +136,16 @@
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
     background-color: $shop-style;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     @media (min-width: 580px) {
       display: flex;
       justify-content: start;
       flex-direction: column;
+    }
+    @media (min-width: 1480px) {
       padding: 20px;
       width: 360px;
       height: 530px;
@@ -174,6 +188,10 @@
       margin: 5px;
       background-color: #fff;
       @media (min-width: 580px) {
+        width: 75px;
+        height: 75px;
+      }
+      @media (min-width: 1480px) {
         width: 150px;
         height: 150px;
         min-height: 150px;
@@ -238,12 +256,15 @@
     display: none;
     background-color: $shop-style;
     padding: 10px 13px;
-    width: 300px;
     border-radius: 10px;
     @media (min-width: 580px) {
       display: flex;
       flex-direction: column;
+      width: 50%;
+    }
+    @media (min-width: 1480px) {
       padding: 20px 23px;
+      width: 300px;
     }
 
     .modal__size {
@@ -251,10 +272,21 @@
       background-color: #fff;
       border-radius: 10px;
       margin-bottom: 20px;
-
+      @media (min-width: 1480px) {
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
       h4 {
         font-size: 22px;
         padding: 5px;
+        @media (min-width: 580px) {
+          font-size: 18px;
+          padding: 0px;
+        }
+        @media (min-width: 1480px) {
+          font-size: 22px;
+          padding: 5px;
+        }
       }
     }
 
@@ -262,6 +294,12 @@
       display: flex;
       flex-wrap: wrap;
       padding: 5px;
+      @media (min-width: 580px) {
+        padding: 2px;
+      }
+      @media (min-width: 1480px) {
+        padding: 5px;
+      }
 
       span {
         text-align: center;
@@ -273,7 +311,14 @@
         background-color: $shop-style;
         border-radius: 10px;
         transition: background-color 0.3s;
-
+        @media (min-width: 580px) {
+          min-width: 30px;
+          padding: 2px;
+        }
+        @media (min-width: 1480px) {
+          min-width: 50px;
+          padding: 5px;
+        }
         &:hover {
           cursor: pointer;
           background-color: $shop-style-blue;
@@ -299,12 +344,20 @@
       background-color: #fff;
       border-radius: 10px;
       margin-bottom: 20px;
+      @media (min-width: 1480px) {
+        margin-bottom: 20px;
+      }
 
       span {
         position: relative;
         padding: 5px;
         font-size: 22px;
-
+        @media (min-width: 580px) {
+          font-size: 18px;
+        }
+        @media (min-width: 1480px) {
+          font-size: 22px;
+        }
         svg {
           position: absolute;
           top: 50%;
@@ -331,9 +384,18 @@
       background-color: #fff;
       border-radius: 10px;
       margin-bottom: 20px;
+      @media (min-width: 1480px) {
+        margin-bottom: 20px;
+      }
 
       span {
         font-size: 22px;
+        @media (min-width: 580px) {
+          font-size: 18px;
+        }
+        @media (min-width: 1480px) {
+          font-size: 22px;
+        }
       }
     }
 
@@ -344,6 +406,12 @@
     }
     svg {
       font-size: 18px;
+      @media (min-width: 580px) {
+        font-size: 14px;
+      }
+      @media (min-width: 1480px) {
+        font-size: 18px;
+      }
     }
   }
 
@@ -362,6 +430,12 @@
     @media (min-width: 580px) {
       display: flex;
       flex-direction: column;
+      width: 50%;
+      padding: 10px 13px;
+      max-width: 475px;
+    }
+    @media (min-width: 1480px) {
+      width: 445px;
       height: 530px;
       padding: 20px 23px;
     }
@@ -372,6 +446,12 @@
       overflow: hidden;
 
       @media (min-width: 580px) {
+        width: 100%;
+        margin-bottom: 20px;
+        max-height: 450px;
+        max-width: 450px;
+      }
+      @media (min-width: 1480px) {
         width: 400px;
         margin-bottom: 20px;
       }
@@ -383,14 +463,29 @@
       padding: 5px;
       background-color: #fff;
       border-radius: 10px;
+      margin-top: 10px;
       @media (min-width: 580px) {
         display: block;
+        width: 100%;
+        margin-top: 0px;
+      }
+      @media (min-width: 1480px) {
+        display: block;
         width: 400px;
+        margin-top: 0px;
       }
     }
 
+    .modal__item--name.active--item {
+      display: block;
+    }
+
     h2 {
+      font-size: 18px;
       color: #111;
+      @media (min-width: 580px) {
+        font-size: 24px;
+      }
     }
   }
 
