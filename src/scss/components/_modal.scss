@@ -159,29 +159,35 @@
     }
 
     &--fullImage {
-      @media (min-width: 580px) {
+      @media (min-width: 780px) {
         position: absolute;
-        top: -15px;
-        left: -350px;
+        width: 600px;
+        top: 0px;
+        left: 0px;
         z-index: 50;
         background: none;
         animation: start-animation-modal 0.9s ease-in-out;
-        z-index: 29;
+        z-index: 33;
         @keyframes start-animation-modal {
           0% {
-            left: 1000px;
+            top: -200px;
           }
           60% {
-            left: 0px;
+            top: 50px;
           }
           100% {
-            left: -350px;
+            top: 0px;
           }
         }
+      }
+      @media (min-width: 1280px) {
+        width: 1000px;
       }
 
       .wrapper__images {
         box-shadow: 0px 0px 10px 4px rgba(34, 60, 80, 0.2);
+        max-height: 100px;
+        max-width: 100px;
       }
     }
 
@@ -200,7 +206,6 @@
       @media (min-width: 1240px) {
         width: 150px;
         height: 150px;
-        min-height: 150px;
       }
 
       img {
