@@ -95,10 +95,11 @@
   }
 
   .block--price {
+    min-width: 250px;
     padding: 10px 20px;
     border-radius: 10px;
     background-color: $shop-style-blurred;
-    font-size: 20px;
+    font-size: 14px;
     animation: block-price-animation 0.6s;
     @keyframes block-price-animation {
       0% {
@@ -107,6 +108,16 @@
       100% {
         transform: translateX(0px);
       }
+    }
+    @media (min-width: 547px) {
+      min-width: 510px;
+    }
+    @media (min-width: 764px) {
+      font-size: 20px;
+      min-width: 650px;
+    }
+    @media (min-width: 960px) {
+      min-width: 350px;
     }
   }
 
@@ -159,13 +170,10 @@
         transform: translateX(0px);
       }
     }
-    @media (min-width: 532px) {
+    @media (min-width: 547px) {
       width: 510px;
     }
     @media (min-width: 764px) {
-      width: 650px;
-    }
-    @media (min-width: 830px) {
       width: 650px;
     }
 
