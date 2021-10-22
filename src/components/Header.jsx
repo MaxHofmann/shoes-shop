@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 function Header({ onClickCart, flagsPage, setFlagsPage }) {
   const { totalPrice } = useCart();
-  
+
   return (
     <header className="header">
       <div className="container">
@@ -31,7 +31,7 @@ function Header({ onClickCart, flagsPage, setFlagsPage }) {
               onClick={() => setFlagsPage(1)}
               className={classNames({
                 'button--icon fa-home active': flagsPage === 1,
-                'button--icon fa-home': flagsPage
+                'button--icon fa-home': flagsPage,
               })}>
               {<FontAwesomeIcon icon={faHouseUser} />}
             </button>
@@ -41,7 +41,7 @@ function Header({ onClickCart, flagsPage, setFlagsPage }) {
               onClick={() => setFlagsPage(2)}
               className={classNames({
                 'button--icon fab fa-gratipay active': flagsPage === 2,
-                'button--icon fab fa-gratipay': flagsPage
+                'button--icon fab fa-gratipay': flagsPage,
               })}>
               {<FontAwesomeIcon icon={faHeart} />}
             </button>
@@ -52,7 +52,7 @@ function Header({ onClickCart, flagsPage, setFlagsPage }) {
                 onClick={() => setFlagsPage(3)}
                 className={classNames({
                   'button--icon fas fa-user-circle active': flagsPage === 3,
-                  'button--icon fas fa-user-circle': flagsPage
+                  'button--icon fas fa-user-circle': flagsPage,
                 })}>
                 {<FontAwesomeIcon icon={faUserCircle} />}
               </button>

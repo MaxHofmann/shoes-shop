@@ -264,15 +264,15 @@ function ModalCard({
           </div>
         </div>
         <div
-            className={classNames({
-              'modal__content--bottom': flagItem,
-              'modal__content--bottom active--item': flagItem === 3,
-            })}>
-            <div className="modal__item--description">
-              <h3>Описание</h3>
-              <p>{description}</p>
-            </div>
+          className={classNames({
+            'modal__content--bottom': flagItem,
+            'modal__content--bottom active--item': flagItem === 3,
+          })}>
+          <div className="modal__item--description">
+            <h3>Описание</h3>
+            <p>{description}</p>
           </div>
+        </div>
       </div>
       {fullImage && (
         <div

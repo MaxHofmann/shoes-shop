@@ -16,8 +16,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    margin: 10px 16px;
-    width: 310px;
+    margin: 10px 7px;
+    width: 250px;
     min-height: 260px;
     background-color: $background-item;
     border-radius: 10px;
@@ -32,6 +32,10 @@
       100% {
         transform: translateY(0px);
       }
+    }
+    @media (min-width: 780px) {
+      margin: 10px 16px;
+      width: 310px;
     }
     @media (min-width: 1510px) {
       margin: 10px 32px;
@@ -50,10 +54,13 @@
 
     .wrapper--img {
       position: relative;
-      width: 280px;
+      width: 220px;
       border-radius: 5px;
       overflow: hidden;
       margin-bottom: 20px;
+      @media (min-width: 780px) {
+        width: 280px;
+      }
     }
 
     h3 {

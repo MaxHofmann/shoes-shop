@@ -14,10 +14,15 @@
   border-radius: 0 10px 10px 0;
   z-index: 1;
   @media (min-width: 580px) {
-    position: absolute;
-    padding: 20px 30px;
-    width: 700px;
+    position: fixed;
+    padding: 5px 10px;
+    width: 600px;
     border-left: 5px solid $shop-style;
+  }
+  @media (min-width: 980px) {
+    padding: 20px 30px;
+    position: absolute;
+    width: 700px;
   }
 
   &.open-drawer {
@@ -55,14 +60,20 @@
 
   &__block {
     min-height: 400px;
-    height: 100vh;
+    height: 95vh;
     background-color: #fff;
     border-radius: 10px;
     transition: 0.3s;
     @media (min-width: 580px) {
+      flex-direction: row;
+      width: 100%;
+      min-height: 300px;
+    }
+    @media (min-width: 980px) {
+      flex-direction: row;
       height: 80vh;
       width: 100%;
-      flex-direction: row;
+      min-height: 400px;
     }
   }
 

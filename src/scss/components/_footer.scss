@@ -2,25 +2,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   position: relative;
   width: 100%;
   bottom: 0;
   padding: 15px;
   background-color: $background-item;
   z-index: 100;
+  @media (min-width: 580px) {
+    flex-direction: column;
+  }
+  @media (min-width: 1240px) {
+    flex-direction: row;
+  }
+
   p {
-    font-size: 22px;
-    margin-right: 20px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    @media (min-width: 1240px) {
+      font-size: 22px;
+      margin-right: 20px;
+      margin-bottom: 0px;
+    }
   }
   a {
     position: relative;
+    height: 30px;
     svg {
-      position: absolute;
       font-size: 30px;
-      margin-right: 20px;
+      margin: 0 10px;
       height: 30px;
       transition: color 0.3s, height 0.3s;
-
+      @media (min-width: 1240px) {
+        margin: 0px;
+        margin-right: 20px;
+      }
       &:hover {
         cursor: pointer;
         color: #fe08f2;
@@ -32,11 +48,7 @@
     }
   }
 
-  .git--icon svg{
-    transform: translate(-50%, -50%);
-  }
-
-  .link--icon svg{
-    transform: translate(100%, -50%);
+  .wrapper__icon {
+    display: flex;
   }
 }

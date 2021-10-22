@@ -16,8 +16,8 @@ function Home({ items, onAddToCart, onAddToFavorite, isLoading, onClose }) {
   };
 
   const onSearchBackspace = () => {
-    if(inputValue.length > 0) {
-      setInputValue('')
+    if (inputValue.length > 0) {
+      setInputValue('');
     }
     setSearchValue('');
   };
