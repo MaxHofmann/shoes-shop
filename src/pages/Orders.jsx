@@ -7,7 +7,7 @@ function Orders() {
   const [totalOrderPrice, setTotalOrderPrice] = React.useState([]);
   const [orders, setOrders] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
-  const { selectSize, setFlagsPage } = React.useContext(AppContext);
+  const { setFlagsPage } = React.useContext(AppContext);
 
   React.useEffect(() => {
     setFlagsPage(3);
@@ -54,7 +54,7 @@ function Orders() {
                   name={obj.name}
                   price={obj.price}
                   sizeItem={obj.size}
-                  selectSize={selectSize}
+                  selectSize={obj.selectSize}
                 />
               ))}
         </ul>

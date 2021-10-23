@@ -57,8 +57,6 @@
     max-width: 1400px;
     z-index: 2;
     transition: opacity 0.3s ease-in-out;
-    @media (min-width: 580px) {
-    }
     @media (min-width: 1240px) {
       border-radius: 10px;
       width: calc(100vw - 100px);

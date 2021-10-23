@@ -54,7 +54,7 @@
     left: -25px;
     width: 100px;
     height: 30px;
-    font-size: 13px;
+    font-size: 12px;
     color: #fff;
     background-color: #ff1100;
     transform: rotate(-45deg);
@@ -64,6 +64,7 @@
       left: -35px;
       width: 125px;
       height: 40px;
+      font-size: 14px;
     }
 
     @media (min-width: 720px) {
@@ -71,9 +72,10 @@
       left: -50px;
       width: 200px;
       height: 60px;
-      font-size: 24px;
     }
-
+    @media (min-width: 1280px) {
+      font-size: 28px;
+    }
     b {
       color: #fff;
     }
@@ -95,10 +97,12 @@
       font-size: 12px;
       color: #fff;
       @media (min-width: 580px) {
-        font-size: 18px;
+        font-size: 14px;
       }
 
       @media (min-width: 720px) {
+      }
+      @media (min-width: 1280px) {
         font-size: 28px;
       }
     }
@@ -184,26 +188,49 @@
     animation: left-button-animation 0.6s;
     @keyframes left-button-animation {
       0% {
-        left: -2000px;
+        left: -1500px;
       }
       100% {
-        left: -75px;
+        left: 100px;
       }
     }
-
     @media (min-width: 450px) {
       top: 280px;
       left: 100px;
+      @keyframes left-button-animation {
+        0% {
+          left: -1500px;
+        }
+        100% {
+          left: 100px;
+        }
+      }
     }
 
     @media (min-width: 720px) {
       top: 380px;
       left: 100px;
+      @keyframes left-button-animation {
+        0% {
+          left: -1500px;
+        }
+        100% {
+          left: 100px;
+        }
+      }
     }
 
     @media (min-width: 1200px) {
       top: 250px;
       left: -75px;
+      @keyframes left-button-animation {
+        0% {
+          left: -2000px;
+        }
+        100% {
+          left: -75px;
+        }
+      }
     }
   }
 
@@ -213,25 +240,49 @@
     animation: right-button-animation 0.6s;
     @keyframes right-button-animation {
       0% {
-        right: -2000px;
+        right: -1500px;
       }
       100% {
-        right: -75px;
+        right: 100px;
       }
     }
     @media (min-width: 450px) {
       top: 280px;
       right: 100px;
+      @keyframes right-button-animation {
+        0% {
+          right: -1500px;
+        }
+        100% {
+          right: 100px;
+        }
+      }
     }
 
     @media (min-width: 720px) {
       top: 380px;
       right: 100px;
+      @keyframes right-button-animation {
+        0% {
+          right: -1500px;
+        }
+        100% {
+          right: 100px;
+        }
+      }
     }
 
     @media (min-width: 1200px) {
       top: 250px;
       right: -75px;
+      @keyframes right-button-animation {
+        0% {
+          right: -2000px;
+        }
+        100% {
+          right: -75px;
+        }
+      }
     }
   }
 }

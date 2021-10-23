@@ -38,7 +38,6 @@ function Card({
     }
   }, [selectSize, onSizeItem, id])
 
-  
   const onAddCard = () => {
     onAddItem({ id, name, imageUrl, price, keyCard, size, selectSize});
   };
@@ -103,7 +102,7 @@ function Card({
         </div>
         <div className="item--price">
           <span>Размер:</span>
-          <b>{onSizeItem} см.</b>
+          <b>{selectSize? selectSize.size:onSizeItem} см.</b>
         </div>
         {onAddItem && (
           <button

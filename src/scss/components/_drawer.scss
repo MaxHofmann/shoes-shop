@@ -176,12 +176,22 @@
   padding: 40px;
 
   .image__remove {
-    padding: 44px;
-    width: 250px;
-    height: 250px;
+    padding: 20px;
+    width: 120px;
+    height: 120px;
     background-color: #673ab7;
     border-radius: 50%;
     margin-bottom: 20px;
+    @media (min-width: 580px) {
+      padding: 30px;
+      width: 200px;
+      height: 200px;
+    }
+    @media (min-width: 1240px) {
+      padding: 44px;
+      width: 250px;
+      height: 250px;
+    }
   }
 
   p {

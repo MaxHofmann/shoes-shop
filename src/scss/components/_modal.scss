@@ -11,8 +11,6 @@
   margin-right: 0px;
   margin-top: 20px;
   padding: 20px 0 0;
-  @media (min-width: 580px) {
-  }
   @media (min-width: 1240px) {
   }
 }
@@ -21,7 +19,7 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   top: 0;
   padding: 10px;
   width: 95vw;
@@ -148,7 +146,7 @@
     margin-bottom: 10px;
     @media (min-width: 580px) {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       flex-direction: column;
     }
     @media (min-width: 1240px) {

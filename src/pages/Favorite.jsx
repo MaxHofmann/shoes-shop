@@ -3,7 +3,7 @@ import { Card } from '../components';
 import AppContext from '../context.js';
 
 function Favorite({ onRemove }) {
-  const { favorites, isLoading, selectSize, setFlagsPage } = React.useContext(AppContext);
+  const { favorites, isLoading, setFlagsPage } = React.useContext(AppContext);
 
   React.useEffect(() => {
     setFlagsPage(2);
@@ -26,7 +26,7 @@ function Favorite({ onRemove }) {
                   name={obj.name}
                   price={obj.price}
                   sizeItem={obj.size}
-                  selectSize={selectSize}
+                  selectSize={obj.selectSize}
                   onRemoveCard={onRemove}
                 />
               ))}
