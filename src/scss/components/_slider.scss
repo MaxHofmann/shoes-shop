@@ -72,6 +72,7 @@
       left: -50px;
       width: 200px;
       height: 60px;
+      font-size: 22px;
     }
     @media (min-width: 1280px) {
       font-size: 28px;
@@ -99,8 +100,8 @@
       @media (min-width: 580px) {
         font-size: 14px;
       }
-
-      @media (min-width: 720px) {
+      @media (min-width: 780px) {
+        font-size: 22px;
       }
       @media (min-width: 1280px) {
         font-size: 28px;
@@ -124,8 +125,10 @@
         @media (min-width: 580px) {
           font-size: 18px;
         }
-
-        @media (min-width: 720px) {
+        @media (min-width: 780px) {
+          font-size: 22px;
+        }
+        @media (min-width: 1280px) {
           font-size: 28px;
         }
       }
@@ -134,7 +137,6 @@
 
   .slider--button {
     top: 50%;
-    transform: translateY(-50%);
     position: absolute;
     padding: 5px 7px;
     background-color: $shop-style-blurred;
@@ -186,51 +188,28 @@
     top: 230px;
     left: 100px;
     animation: left-button-animation 0.6s;
+    transform: translate(0px, -50%);
     @keyframes left-button-animation {
       0% {
-        left: -1500px;
+        transform: translate(-2000px, -50%);
       }
       100% {
-        left: 100px;
+        transform: translate(0px, -50%);
       }
     }
     @media (min-width: 450px) {
       top: 280px;
       left: 100px;
-      @keyframes left-button-animation {
-        0% {
-          left: -1500px;
-        }
-        100% {
-          left: 100px;
-        }
-      }
     }
 
     @media (min-width: 720px) {
       top: 380px;
       left: 100px;
-      @keyframes left-button-animation {
-        0% {
-          left: -1500px;
-        }
-        100% {
-          left: 100px;
-        }
-      }
     }
 
     @media (min-width: 1200px) {
       top: 250px;
       left: -75px;
-      @keyframes left-button-animation {
-        0% {
-          left: -2000px;
-        }
-        100% {
-          left: -75px;
-        }
-      }
     }
   }
 
@@ -238,51 +217,28 @@
     top: 230px;
     right: 100px;
     animation: right-button-animation 0.6s;
+    transform: translate(0px, -50%);
     @keyframes right-button-animation {
       0% {
-        right: -1500px;
+        transform: translate(2000px, -50%);
       }
       100% {
-        right: 100px;
+        transform: translate(0px, -50%);
       }
     }
     @media (min-width: 450px) {
       top: 280px;
       right: 100px;
-      @keyframes right-button-animation {
-        0% {
-          right: -1500px;
-        }
-        100% {
-          right: 100px;
-        }
-      }
     }
 
     @media (min-width: 720px) {
       top: 380px;
       right: 100px;
-      @keyframes right-button-animation {
-        0% {
-          right: -1500px;
-        }
-        100% {
-          right: 100px;
-        }
-      }
     }
 
     @media (min-width: 1200px) {
       top: 250px;
       right: -75px;
-      @keyframes right-button-animation {
-        0% {
-          right: -2000px;
-        }
-        100% {
-          right: -75px;
-        }
-      }
     }
   }
 }

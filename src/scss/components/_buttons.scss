@@ -26,15 +26,16 @@
     transition: font-size 0.1s ease-in-out;
     font-size: 24px;
   }
+  @media (min-width: 1280px) {
+    &:hover {
+      cursor: pointer;
+      color: $shop-style-blue;
+      background-color: #fff;
+    }
+  }
 
   &:active svg {
     font-size: 20px;
-  }
-
-  &:hover {
-    cursor: pointer;
-    color: $shop-style-blue;
-    background-color: #fff;
   }
 }
 
